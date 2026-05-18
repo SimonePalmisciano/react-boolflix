@@ -7,7 +7,6 @@ function HomePage() {
 
     return (
         <>
-            <SearchBar />
             <div>
                 {JSON.stringify(movies)}
             </div>

@@ -1,6 +1,8 @@
-function Main() {
+function Main({children}) {
     return (
-        <div>Main</div>
+        <main>
+            {children}
+        </main>
     )
 }
 export default Main

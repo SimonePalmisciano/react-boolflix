@@ -1,10 +1,15 @@
+import { Outlet } from "react-router"
+import Header from "../components/Header/Header"
+import Main from "../components/Main/Main"
+
 function MainLayout() {
     return (
-        <header className="bg-dark">
-            <span className="text-white">
-                BOOLFLIX
-            </span>
-        </header>
+        <>
+            <Header />
+            <Main>
+                <Outlet />
+            </Main>
+        </>
     )
 }
 export default MainLayout

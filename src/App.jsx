@@ -11,7 +11,9 @@ function App() {
         <MovieProvider>
           <Routes>
 
-            <Route index element={<HomePage />} />
+            <Route Component={MainLayout}>
+              <Route index element={<HomePage />} />
+            </Route>
             <Route path="*" Component={NotFound} />
 
           </Routes>
