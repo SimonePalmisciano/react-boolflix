@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
-import useFetch from "../hooks/useFetch";
-import {MovieContext} from "../contexts/MovieContext";
+import { initCatalog } from "../hooks/useFetch";
+import { MovieContext } from "../contexts/MovieContext";
 
 const initialSearchValue = '';
 
@@ -21,9 +21,9 @@ function SearchBar() {
     const submitHandler = (event) => {
         event.preventDefault();
 
-        useFetch(searchValue)
+        initCatalog(searchValue)
             .then(data => {
-                setMovies(data.results)
+                setMovies(data)
             });
 
         setSearchValue(initialSearchValue);
