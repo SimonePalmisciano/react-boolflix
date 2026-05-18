@@ -1,10 +1,24 @@
-import { createContext } from "react"
+import { createContext, useState } from "react"
 
 const MovieContext = createContext(null);
 
-function MovieProvider() {
+function MovieProvider({ children }) {
+    const [movies, setMovies] = useState([]);
 
+    const valueToSend = {
+        movies,
+        setMovies,
+    };
 
-    return 
+    return (
+        <>
+            <MovieContext value={valueToSend}>
+                {children}
+            </MovieContext>
+        </>
+    )
 }
-export default MovieContext
+export {
+    MovieContext,
+    MovieProvider
+}

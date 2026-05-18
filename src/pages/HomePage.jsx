@@ -1,10 +1,16 @@
+import { useContext } from "react"
 import SearchBar from "./SearchBar"
+import { MovieContext } from "../contexts/MovieContext"
 
 function HomePage() {
+    const movies = useContext(MovieContext)
+
     return (
         <>
             <SearchBar />
-            <div>Home</div>
+            <div>
+                {JSON.stringify(movies)}
+            </div>
         </>
     )
 }

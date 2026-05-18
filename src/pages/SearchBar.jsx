@@ -1,19 +1,12 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import useFetch from "../hooks/useFetch";
+import {MovieContext} from "../contexts/MovieContext";
+
+const initialSearchValue = '';
 
 function SearchBar() {
-    const [searchValue, setSearchValue] = useState('');
-    const [movies, setMovies] = useState([]);
-
-    const initialSearchValue = undefined;
-
-    const MVDB_API_KEY = import.meta.env.VITE_TMDB_API_KEY;
-    const options = {
-        method: 'GET',
-        headers: {
-            accept: 'application/json',
-            Authorization: `Bearer ${import.meta.env.VITE_TMDB_API_KEY}`
-        }
-    };
+    const [searchValue, setSearchValue] = useState(initialSearchValue);
+    const { setMovies } = useContext(MovieContext)
 
     const handleChange = (event) => {
         const target = event.target;
@@ -23,17 +16,18 @@ function SearchBar() {
         } = target;
 
         setSearchValue(value);
+        console.log(value);
     }
 
     const submitHandler = (event) => {
         event.preventDefault();
 
-        fetch(`https://api.themoviedb.org/3/search/movie?query=${searchValue}&include_adult=false&language=en-US&page=1`, options)
-            .then(response => {
-                return response.json()
-            })
-            .then(data => setMovies(data))
-            .catch(err => console.error(err));
+        useFetch(searchValue)
+            .then(data => {
+                setMovies(data)
+            });
+
+        setSearchValue(initialSearchValue);
     };
 
     return (
@@ -43,19 +37,18 @@ function SearchBar() {
                     BOOLFLIX
                 </span>
                 <div className="d-flex justify-content-center">
-                    <form className="d-flex">
+                    <form className="d-flex" onSubmit={submitHandler}>
                         <input
                             className="form-control me-2"
                             type="text"
                             placeholder="Search Movie..."
-                            value={initialSearchValue}
+                            value={searchValue}
                             name="search"
                             onChange={handleChange}
                         />
                         <button
                             className="btn btn-outline-secondary"
                             type="submit"
-                            onClick={submitHandler}
                         >
                             Search
                         </button>

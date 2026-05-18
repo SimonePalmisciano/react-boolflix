@@ -2,17 +2,20 @@ import { BrowserRouter, Route, Routes } from "react-router";
 import MainLayout from "./layouts/MainLayout";
 import NotFound from "./pages/NotFound";
 import HomePage from "./pages/HomePage";
+import { MovieProvider } from "./contexts/MovieContext"
 
 function App() {
   return (
     <>
       <BrowserRouter>
-        <Routes>
+        <MovieProvider>
+          <Routes>
 
-          <Route index element={<HomePage />} />
-          <Route path="*" Component={NotFound} />
+            <Route index element={<HomePage />} />
+            <Route path="*" Component={NotFound} />
 
-        </Routes>
+          </Routes>
+        </MovieProvider>
       </BrowserRouter>
     </>
   )
