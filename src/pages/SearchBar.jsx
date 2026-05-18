@@ -16,7 +16,6 @@ function SearchBar() {
         } = target;
 
         setSearchValue(value);
-        console.log(value);
     }
 
     const submitHandler = (event) => {
@@ -24,7 +23,7 @@ function SearchBar() {
 
         useFetch(searchValue)
             .then(data => {
-                setMovies(data)
+                setMovies(data.results)
             });
 
         setSearchValue(initialSearchValue);
