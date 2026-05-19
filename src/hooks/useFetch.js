@@ -51,17 +51,18 @@ function initCatalog(searchValue) {
         })
 
         const merge = [...arr1, ...arr2];
-        console.log(arr1);
-        console.log(arr2);
-
         return merge;
-
     });
     return catalogComplete
 }
 
+function getImageURL(path, size = 'original') {
+    return `https://image.tmdb.org/t/p/${size}/${path}`;
+};
+
 
 
 export {
-    initCatalog
+    initCatalog,
+    getImageURL,
 }   

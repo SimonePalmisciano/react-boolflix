@@ -3,11 +3,12 @@ import { Card, Col } from "react-bootstrap"
 import SearchBar from "./SearchBar"
 import { MovieContext } from "../contexts/MovieContext"
 import "flag-icons/css/flag-icons.min.css";
+import { getImageURL } from "../hooks/useFetch";
 
 function HomePage() {
     const movies = useContext(MovieContext);
     console.log(movies);
-    
+
 
     return (
         <>
@@ -20,6 +21,7 @@ function HomePage() {
                             original_title,
                             title,
                             vote_average,
+                            poster_path,
                         } = movie;
 
                         return (
@@ -27,8 +29,9 @@ function HomePage() {
                                 <Card>
                                     <Card.Header>
                                         <Card.Title>
-                                            <h5>Titolo: {title}</h5>
+                                            <h5>{title}</h5>
                                             {original_title !== title && <h5>Titolo Originale:{original_title}</h5>}
+                                            <img src={getImageURL(movie.poster_path, 'w342')} alt={movie.title} />
                                         </Card.Title>
                                     </Card.Header>
                                     <Card.Body>

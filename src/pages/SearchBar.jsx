@@ -24,7 +24,8 @@ function SearchBar() {
         initCatalog(searchValue)
             .then(data => {
                 setMovies(data)
-            });
+            })
+            .catch(err => console.error(err));
 
         setSearchValue(initialSearchValue);
     };
