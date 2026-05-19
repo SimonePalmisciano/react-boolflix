@@ -1,6 +1,6 @@
 
 
-function useFetch(searchValue) {
+function fetchUtils(searchValue) {
 
     const options = {
         method: 'GET',
@@ -35,7 +35,7 @@ function useFetch(searchValue) {
 }
 
 function initCatalog(searchValue) {
-    const catalogComplete = Promise.all(useFetch(searchValue)).then(response => {
+    const catalogComplete = Promise.all(fetchUtils(searchValue)).then(response => {
         const arr1 = response[0];
         const arr2 = response[1].map(movie => {
             const {

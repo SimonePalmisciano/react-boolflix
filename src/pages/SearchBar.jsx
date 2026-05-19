@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { initCatalog } from "../hooks/useFetch";
+import { initCatalog } from "../utils/fetchUtils";
 import { MovieContext } from "../contexts/MovieContext";
 
 const initialSearchValue = '';
