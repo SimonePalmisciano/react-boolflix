@@ -1,6 +1,8 @@
 import { useState, useContext } from "react";
 import { initCatalog } from "../utils/fetchUtils";
 import { MovieContext } from "../contexts/MovieContext";
+import { Container } from "react-bootstrap"
+import styles from "./SearchBar.module.css"
 
 const initialSearchValue = '';
 
@@ -9,53 +11,42 @@ function SearchBar() {
     const { setMovies } = useContext(MovieContext)
 
     const handleChange = (event) => {
-        const target = event.target;
-        const {
-            value,
-            name,
-        } = target;
-
-        setSearchValue(value);
+        setSearchValue(event.target.value);
     }
 
     const submitHandler = (event) => {
         event.preventDefault();
-
         initCatalog(searchValue)
-            .then(data => {
-                setMovies(data)
-            })
+            .then(data => setMovies(data))
             .catch(err => console.error(err));
-
         setSearchValue(initialSearchValue);
     };
 
     return (
-        <nav className="navbar bg-dark">
-            <div className="container-fluid d-flex justify-content-between">
-                <span className="text-white">
+        <nav className={styles.navbar}>
+            <div className={styles.container}>
+                <span className={styles.logo}>
                     BOOLFLIX
                 </span>
-                <div className="d-flex justify-content-center">
-                    <form className="d-flex" onSubmit={submitHandler}>
-                        <input
-                            className="form-control me-2"
-                            type="text"
-                            placeholder="Search Movie..."
-                            value={searchValue}
-                            name="search"
-                            onChange={handleChange}
-                        />
-                        <button
-                            className="btn btn-outline-secondary"
-                            type="submit"
-                        >
-                            Search
-                        </button>
-                    </form>
-                </div>
+                <form className={styles.form} onSubmit={submitHandler}>
+                    <input
+                        className={styles.input}
+                        type="text"
+                        placeholder="Cerca film o serie..."
+                        value={searchValue}
+                        name="search"
+                        onChange={handleChange}
+                    />
+                    <button
+                        className={styles.button}
+                        type="submit"
+                    >
+                        Cerca
+                    </button>
+                </form>
             </div>
         </nav>
     )
 }
+
 export default SearchBar
