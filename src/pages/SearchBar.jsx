@@ -1,18 +1,20 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { initCatalog } from "../utils/fetchUtils";
 import { MovieContext } from "../contexts/MovieContext";
 import { Container } from "react-bootstrap"
 import styles from "./SearchBar.module.css"
+import { fetchTrendingMovies, fetchTrendingTv } from "../utils/fetchTrending";
+import { Link } from "react-router";
 
 const initialSearchValue = '';
 
 function SearchBar() {
     const [searchValue, setSearchValue] = useState(initialSearchValue);
-    const { setMovies } = useContext(MovieContext)
+    const { setMovies } = useContext(MovieContext);
 
     const handleChange = (event) => {
         setSearchValue(event.target.value);
-    }
+    };
 
     const submitHandler = (event) => {
         event.preventDefault();
@@ -22,12 +24,19 @@ function SearchBar() {
         setSearchValue(initialSearchValue);
     };
 
+    useEffect(() => {
+        fetchTrendingMovies()
+            .then(trendMovies => setMovies(trendMovies));
+        // fetchTrendingTv()
+        //     .then(trendTv => setTrendingTv(trendTv));
+    }, [])
+
     return (
         <nav className={styles.navbar}>
             <div className={styles.container}>
-                <span className={styles.logo}>
+                <Link to="/" className={styles.logo}>
                     BOOLFLIX
-                </span>
+                </Link>
                 <form className={styles.form} onSubmit={submitHandler}>
                     <input
                         className={styles.input}

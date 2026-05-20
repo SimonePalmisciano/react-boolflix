@@ -1,4 +1,8 @@
 /* Netflix-style dark theme globals */
+a{
+    text-decoration: none;
+}
+
 :root {
     --netflix-black: #141414;
     --netflix-red: #e50914;
